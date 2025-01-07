@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles{% endblock %}
+
+{% block content%}
+
+
+<h2>{{tarea.nombre}}</h2>
+<p> fecha de creacion: {{tarea.fecha}} </p>
+<p>descripcion: {{tarea.descripcion}} </p>
+<p>estado: {{tarea.estado}} </p>
+
+<a href="{% url 'tarea_update' tarea.pk %}"> editar</a>
+<a href="{% url 'tarea_delete' tarea.pk %}"> eliminar</a>
+<a href="{% url 'tarea_list' %}"> volver</a>
+    
+
+{%endblock content%}

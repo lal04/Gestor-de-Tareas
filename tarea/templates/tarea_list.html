@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}lista tareas{% endblock %}
+
+{% block content%}
+
+
+<a href="{% url 'tarea_create'%}"> agregar </a>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>fecha</th>
+            <th>descripcon</th>
+            <th>estado</th>
+            <th>acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tarea in  tarea_list%}
+        <tr>
+            
+            <th>{{tarea.pk}}</th>
+            <th>{{tarea.nombre}}</th>
+            <th>{{tarea.descripcion}}</th>
+            <th>{{tarea.fecha}}</th>
+            <th>{{tarea.estado}}</th>
+            <th>
+                
+                <a href="{% url 'tarea_detail' tarea.pk %}"> Ver </a>
+                <a href="{% url 'tarea_update' tarea.pk %}"> Editar </a>
+                <a href="{% url 'tarea_delete' tarea.pk %}"> Eliminar </a>
+            </th>
+            
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{%endblock content%}

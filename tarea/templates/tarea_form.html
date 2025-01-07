@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content%}
+
+{% if tarea %} editar{% else %} crear{% endif %}
+
+<form method="post">
+    {%csrf_token%}
+    {{form.as_p}}
+
+    <button type="submit">guardar</button>
+
+    <a href="{% url 'tarea_list' %}">cancelar</a>
+
+
+
+    
+</form>
+
+
+
+{%endblock content%}
