@@ -1,0 +1,83 @@
+/* Estilo general del formulario */
+
+
+/* Estilo de los labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Estilo para el input con id="id_nombre" */
+#id_nombre {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Estilo para el input con id="id_nombre" cuando está en focus */
+#id_nombre:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo para el textarea con id="id_descripcion" */
+#id_descripcion {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    outline: none;
+    resize: vertical;  /* Permite cambiar el tamaño solo en vertical */
+    transition: border-color 0.3s ease;
+}
+
+/* Estilo para el textarea con id="id_descripcion" cuando está en focus */
+#id_descripcion:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo para el select con id="id_estado" */
+#id_estado {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Estilo para el select con id="id_estado" cuando está en focus */
+#id_estado:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo para los option dentro del select */
+#id_estado option {
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+}
+
+/* Estilo para el option cuando está seleccionado */
+#id_estado option:checked {
+    background-color: #007BFF;
+    color: white;
+}

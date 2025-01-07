@@ -1,13 +1,35 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href=" {% static 'css/style.css' %}">
     <title> {% block title%} {% endblock title%}</title>
 </head>
 <body>
     <header>
-        <label > buscador<input type="text"></label>
+        <div class="flex items-center justify-center p-4">
+            <form class="relative flex w-full max-w-md">
+              <!-- Input -->
+              <input 
+                type="text" 
+                placeholder="Buscar..." 
+                class="w-full py-2 pl-10 pr-4 text-sm border rounded-l-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300"
+              />
+              <!-- Botón -->
+              <button 
+                type="submit" 
+                class="px-4 text-white bg-blue-500 border-l border-blue-600 rounded-r-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500"
+              >
+                Buscar
+              </button>
+            </form>
+          </div>
+          
+          
+
 
     </header>
 

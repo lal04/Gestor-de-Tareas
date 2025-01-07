@@ -1,44 +1,68 @@
 {% extends "base.html" %}
 
-{% block title %}lista tareas{% endblock %}
+{% block title %}Lista de Tareas{% endblock %}
 
 {% block content%}
 
+<div class="container mx-auto mt-8">
+    <!-- Botón de agregar -->
+    <div class="flex justify-end mb-4">
+        <a href="{% url 'tarea_create' %}" 
+           class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+           Agregar
+        </a>
+    </div>
 
-<a href="{% url 'tarea_create'%}"> agregar </a>
+    <!-- Tabla -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+            <thead>
+                <tr class="bg-blue-500 text-white text-left">
+                    <th class="px-4 py-2">ID</th>
+                    <th class="px-4 py-2">Nombre</th>
+                    <th class="px-4 py-2">Fecha</th>
+                    <th class="px-4 py-2">Descripción</th>
+                    <th class="px-4 py-2">Estado</th>
+                    <th class="px-4 py-2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tarea in tarea_list %}
+                <tr class="border-b hover:bg-gray-100">
+                    <td class="px-4 py-2">{{ tarea.pk }}</td>
+                    <td class="px-4 py-2">{{ tarea.nombre }}</td>
+                    <td class="px-4 py-2">{{ tarea.fecha }}</td>
+                    <td class="px-4 py-2">{{ tarea.descripcion }}</td>
+                    <td class="px-4 py-2">
+                        {% if tarea.estado == 'pendiente'%}
+                        <span class="px-2 py-1 text-xs font-semibold text-red-700 bg-red-100 rounded-full">{{tarea.estado.capitalize}}</span>
+                        {% else %}
+                        <span class="px-2 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">{{tarea.estado.capitalize}}</span>
+                        {% endif %}
+                    </td>
+                    <td class="px-4 py-2 flex space-x-2">
+                        <a href="{% url 'tarea_detail' tarea.pk %}" 
+                           class="px-3 py-1 text-sm text-white bg-green-500 rounded hover:bg-green-600">
+                           Ver
+                        </a>
+                        <a href="{% url 'tarea_update' tarea.pk %}" 
+                           class="px-3 py-1 text-sm text-white bg-yellow-500 rounded hover:bg-yellow-600">
+                           Editar
+                        </a>
+                        <a href="{% url 'tarea_delete' tarea.pk %}" 
+                           class="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600">
+                           Eliminar
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center text-gray-500 py-4">No hay tareas disponibles.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
-
-<table>
-    <thead>
-        <tr>
-            <th>id</th>
-            <th>nombre</th>
-            <th>fecha</th>
-            <th>descripcon</th>
-            <th>estado</th>
-            <th>acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for tarea in  tarea_list%}
-        <tr>
-            
-            <th>{{tarea.pk}}</th>
-            <th>{{tarea.nombre}}</th>
-            <th>{{tarea.descripcion}}</th>
-            <th>{{tarea.fecha}}</th>
-            <th>{{tarea.estado}}</th>
-            <th>
-                
-                <a href="{% url 'tarea_detail' tarea.pk %}"> Ver </a>
-                <a href="{% url 'tarea_update' tarea.pk %}"> Editar </a>
-                <a href="{% url 'tarea_delete' tarea.pk %}"> Eliminar </a>
-            </th>
-            
-            
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-{%endblock content%}
+{% endblock content %}

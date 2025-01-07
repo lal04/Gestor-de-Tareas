@@ -4,15 +4,43 @@
 
 {% block content%}
 
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <!-- Contenedor principal -->
+    <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
+        <!-- Título -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">
+            {{ tarea.nombre }}
+        </h2>
 
-<h2>{{tarea.nombre}}</h2>
-<p> fecha de creacion: {{tarea.fecha}} </p>
-<p>descripcion: {{tarea.descripcion}} </p>
-<p>estado: {{tarea.estado}} </p>
+        <!-- Detalles -->
+        <div class="space-y-3 text-gray-600">
+            <p><span class="font-semibold text-gray-800">Fecha de creación:</span> {{ tarea.fecha }}</p>
+            <p><span class="font-semibold text-gray-800">Descripción:</span> {{ tarea.descripcion }}</p>
+            <p><span class="font-semibold text-gray-800">Estado:</span> 
+                {% if tarea.estado %}
+                    <span class="text-green-500 font-semibold">Completado</span>
+                {% else %}
+                    <span class="text-red-500 font-semibold">Pendiente</span>
+                {% endif %}
+            </p>
+        </div>
 
-<a href="{% url 'tarea_update' tarea.pk %}"> editar</a>
-<a href="{% url 'tarea_delete' tarea.pk %}"> eliminar</a>
-<a href="{% url 'tarea_list' %}"> volver</a>
-    
+        <!-- Botones -->
+        <div class="mt-6 flex flex-col space-y-3">
+            <a href="{% url 'tarea_update' tarea.pk %}" 
+               class="w-full text-center px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+                Editar
+            </a>
+            <a href="{% url 'tarea_delete' tarea.pk %}" 
+               class="w-full text-center px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75">
+                Eliminar
+            </a>
+            <a href="{% url 'tarea_list' %}" 
+               class="w-full text-center px-4 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75">
+                Volver
+            </a>
+        </div>
+    </div>
+</div>
 
-{%endblock content%}
+{% endblock content %}
