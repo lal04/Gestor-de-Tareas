@@ -4,11 +4,54 @@
 
 {% block content%}
 
+<div class="flex items-center justify-center p-4">
+    <form method="get" action=" {% url 'tarea_list' %} " class="relative flex w-full max-w-md">
+      <!-- Input -->
+      <input
+        name="busqueda"
+
+        value=""
+        type="text" 
+        placeholder="Buscar..." 
+        class="w-full py-2 pl-10 pr-4 text-sm border rounded-l-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300"
+      />
+      <!-- Botón -->
+      <button 
+        type="submit" 
+        class="px-4 text-white bg-blue-500 border-l border-blue-600 rounded-r-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500"
+      >
+        Buscar
+      </button>
+    </form>
+  </div>
+
 <div class="container mx-auto mt-8">
-    <!-- Botón de agregar -->
+
+    <!-- Contenedor de botones -->
+     
     <div class="flex justify-end mb-4">
+        <!-- Botón de completados -->
+
+        <form method="get" action=" {% url 'tarea_list' %} ">
+            <!-- Input -->
+            <input
+
+            hidden
+              name="completados"
+              value="completada"
+              
+            />
+            <!-- Botón -->
+            <button class="px-4 mr-6 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75"
+              type="submit" 
+            >
+              Completados
+            </button>
+          </form>
+    
+        <!-- Botón de agregar -->
         <a href="{% url 'tarea_create' %}" 
-           class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+           class="px-4 mr-6 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
            Agregar
         </a>
     </div>
@@ -28,23 +71,21 @@
             </thead>
             <tbody>
                 {% for tarea in tarea_list %}
-                <tr class="border-b hover:bg-gray-100">
-                    <td class="px-4 py-2">{{ tarea.pk }}</td>
-                    <td class="px-4 py-2">{{ tarea.nombre }}</td>
-                    <td class="px-4 py-2">{{ tarea.fecha }}</td>
-                    <td class="px-4 py-2">{{ tarea.descripcion }}</td>
-                    <td class="px-4 py-2">
-                        {% if tarea.estado == 'pendiente'%}
-                        <span class="px-2 py-1 text-xs font-semibold text-red-700 bg-red-100 rounded-full">{{tarea.estado.capitalize}}</span>
-                        {% else %}
-                        <span class="px-2 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">{{tarea.estado.capitalize}}</span>
-                        {% endif %}
-                    </td>
+                
+               
+                    <tr class="border-b hover:bg-gray-100 cursor-pointer" onclick="window.location.href='{% url "tarea_detail" tarea.pk %}'">
+                        <td class="px-4 py-2">{{ tarea.pk }}</td>
+                        <td class="px-4 py-2">{{ tarea.nombre }}</td>
+                        <td class="px-4 py-2">{{ tarea.fecha }}</td>
+                        <td class="px-4 py-2">{{ tarea.descripcion }}</td>
+                        <td class="px-4 py-2">
+                            {% if tarea.estado == 'pendiente'%}
+                            <span class="px-2 py-1 text-xs font-semibold text-red-700 bg-red-100 rounded-full">{{tarea.estado.capitalize}}</span>
+                            {% else %}
+                            <span class="px-2 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">{{tarea.estado.capitalize}}</span>
+                            {% endif %}
+                        </td>
                     <td class="px-4 py-2 flex space-x-2">
-                        <a href="{% url 'tarea_detail' tarea.pk %}" 
-                           class="px-3 py-1 text-sm text-white bg-green-500 rounded hover:bg-green-600">
-                           Ver
-                        </a>
                         <a href="{% url 'tarea_update' tarea.pk %}" 
                            class="px-3 py-1 text-sm text-white bg-yellow-500 rounded hover:bg-yellow-600">
                            Editar

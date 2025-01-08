@@ -18,6 +18,29 @@ class TareaListView(ListView):
     model=Tarea
     template_name='tarea_list.html'
     
+    def get_queryset(self):
+        #queryset=Tarea.objects.all()
+        
+        queryset=Tarea.objects.filter(estado='pendiente')
+        
+        
+        query=self.request.GET.get('busqueda', '')
+        
+        completados=self.request.GET.get('completados', '')
+        
+        
+        if query:
+            
+            queryset=queryset.filter(nombre__icontains=query)
+            
+        if completados:
+            
+            queryset=Tarea.objects.filter(estado=completados)
+        
+            
+        
+        return queryset
+    
     
 class TareaUpdateView(UpdateView):
     model=Tarea

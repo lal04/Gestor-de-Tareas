@@ -17,10 +17,10 @@
             <p><span class="font-semibold text-gray-800">Fecha de creación:</span> {{ tarea.fecha }}</p>
             <p><span class="font-semibold text-gray-800">Descripción:</span> {{ tarea.descripcion }}</p>
             <p><span class="font-semibold text-gray-800">Estado:</span> 
-                {% if tarea.estado %}
-                    <span class="text-green-500 font-semibold">Completado</span>
+                {% if tarea.estado == 'pendiente' %}
+                    <span class="text-red-500 font-semibold">{{tarea.estado.capitalize}}</span>
                 {% else %}
-                    <span class="text-red-500 font-semibold">Pendiente</span>
+                    <span class="text-green-500 font-semibold">{{tarea.estado.capitalize}}</span>
                 {% endif %}
             </p>
         </div>
